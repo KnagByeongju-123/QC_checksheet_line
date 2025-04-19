@@ -33,15 +33,22 @@
       border-collapse: collapse;
       text-align: left;
       font-size: 18px;
+      table-layout: fixed; /* 고정 레이아웃 */
+      margin-bottom: 16px;
     }
     th, td {
       border: 1px solid #444;
       padding: 8px;
+      box-sizing: border-box;
     }
     th {
       background-color: #f0f0f0;
       text-align: center;
     }
+    /* 왼쪽 1열 35%, 오른쪽 2열 65% 고정 */
+    th:nth-child(1), td:nth-child(1) { width: 35%; }
+    th:nth-child(2), td:nth-child(2) { width: 65%; }
+
     .section-title {
       font-weight: bold;
       background-color: #dbefff;
