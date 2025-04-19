@@ -164,11 +164,8 @@
     // 현재 날짜와 시간 설정
     window.addEventListener("DOMContentLoaded", () => {
       const now = new Date();
-      const dateStr = now.toISOString().split("T")[0];
-      const timeStr = now.toTimeString().split(":").slice(0,2).join(":");
-
-      document.getElementById("checkDate").value = dateStr;
-      document.getElementById("checkTime").value = timeStr;
+      document.getElementById("checkDate").value = now.toISOString().split("T")[0];
+      document.getElementById("checkTime").value = now.toTimeString().split(":").slice(0,2).join(":");
     });
 
     const form = document.getElementById("inspectionForm");
@@ -196,11 +193,14 @@
         method: "POST",
         mode: "no-cors",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       })
-      .then(() => alert("성공적으로 저장되었습니다."))
+      .then(() => {
+        alert("성공적으로 저장되었습니다.");
+        window.close();
+      })
       .catch((error) => alert("저장 실패: " + error));
     });
   </script>
