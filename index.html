@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>현장 순회검사 체크시트</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+    }
+    form {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      margin-top: 4px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+    input[type="radio"] {
+      width: auto;
+      margin-right: 6px;
+    }
+    .radio-group label {
+      margin-right: 15px;
+    }
+    .section {
+      background-color: #eef6ff;
+      padding: 10px;
+      margin-top: 20px;
+      border-left: 5px solid #2196f3;
+    }
+    .submit-button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2196f3;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .submit-button:hover {
+      background-color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <form id="inspectionForm">
+    <h2>현장 순회검사 체크시트</h2>
+
+    <label for="checkDate">점검일자</label>
+    <input type="date" id="checkDate" name="checkDate" required>
+
+    <label for="checkTime">점검시간</label>
+    <input type="time" id="checkTime" name="checkTime" required>
+
+    <label for="inspector">검사자</label>
+    <input type="text" id="inspector" name="inspector" required>
+
+    <div class="section">
+      <label for="b_machine_count">B동 가동설비 대수</label>
+      <input type="number" id="b_machine_count" name="b_machine_count" required>
+
+      <p>제품외관</p>
+      <div class="radio-group">
+        <label><input type="radio" name="b_appearance" value="OK" required> OK</label>
+        <label><input type="radio" name="b_appearance" value="NG"> NG</label>
+      </div>
+
+      <p>구분관리</p>
+      <div class="radio-group">
+        <label><input type="radio" name="b_separation" value="OK" required> OK</label>
+        <label><input type="radio" name="b_separation" value="NG"> NG</label>
+      </div>
+
+      <p>박스상태</p>
+      <div class="radio-group">
+        <label><input type="radio" name="b_box" value="OK" required> OK</label>
+        <label><input type="radio" name="b_box" value="NG"> NG</label>
+      </div>
+
+      <p>자주검사</p>
+      <div class="radio-group">
+        <label><input type="radio" name="b_check" value="OK" required> OK</label>
+        <label><input type="radio" name="b_check" value="NG"> NG</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <label for="c_machine_count">C동 가동설비 대수</label>
+      <input type="number" id="c_machine_count" name="c_machine_count" required>
+
+      <p>제품외관</p>
+      <div class="radio-group">
+        <label><input type="radio" name="c_appearance" value="OK" required> OK</label>
+        <label><input type="radio" name="c_appearance" value="NG"> NG</label>
+      </div>
+
+      <p>구분관리</p>
+      <div class="radio-group">
+        <label><input type="radio" name="c_separation" value="OK" required> OK</label>
+        <label><input type="radio" name="c_separation" value="NG"> NG</label>
+      </div>
+
+      <p>박스상태</p>
+      <div class="radio-group">
+        <label><input type="radio" name="c_box" value="OK" required> OK</label>
+        <label><input type="radio" name="c_box" value="NG"> NG</label>
+      </div>
+
+      <p>자주검사</p>
+      <div class="radio-group">
+        <label><input type="radio" name="c_check" value="OK" required> OK</label>
+        <label><input type="radio" name="c_check" value="NG"> NG</label>
+      </div>
+    </div>
+
+    <label for="memo">메모</label>
+    <textarea id="memo" name="memo" rows="4" placeholder="특이사항 또는 메모를 입력하세요"></textarea>
+
+    <button type="submit" class="submit-button">제출</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("inspectionForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = {
+        checkDate: form.checkDate.value,
+        checkTime: form.checkTime.value,
+        inspector: form.inspector.value,
+        b_machine_count: form.b_machine_count.value,
+        b_appearance: form.b_appearance.value,
+        b_separation: form.b_separation.value,
+        b_box: form.b_box.value,
+        b_check: form.b_check.value,
+        c_machine_count: form.c_machine_count.value,
+        c_appearance: form.c_appearance.value,
+        c_separation: form.c_separation.value,
+        c_box: form.c_box.value,
+        c_check: form.c_check.value,
+        memo: form.memo.value
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbwTccYvP1SAEkN5CrtF5ATLetgVuTleu3GBNxsL6SYVXZdlm4F1HefBi3YGyjDm3QKZsA/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+      .then(() => alert("성공적으로 저장되었습니다."))
+      .catch((error) => alert("저장 실패: " + error));
+    });
+  </script>
+</body>
+</html>
